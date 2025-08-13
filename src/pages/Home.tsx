@@ -1,13 +1,14 @@
 import Logo from "../components/Logo";
 import { Link } from "react-router";
 import homepageBg from "../assets/homepageBg.png";
+import { ROUTES } from "../constants/routes";
 
 const Home = () => {
   return (
     <div className="px-12 standardMaxWidth">
       <div className="flex justify-between items-center p-4">
         <Logo />
-        <Link to="/login">Login / Register</Link>
+        <Link to={ROUTES.REGISTER}>Login / Register</Link>
       </div>
       <h1 className="text-6xl font-bold mt-32 text-center">
         Organize Rides & Ride Together.
@@ -19,7 +20,7 @@ const Home = () => {
         planning a multi-day road trip, MotoNexus helps you keep everything in
         sync — from dates and participants to gear and hotel bookings.
       </p>
-      <Link to="/login" className="flex justify-center mt-10">
+      <Link to={ROUTES.REGISTER} className="flex justify-center mt-10">
         <button className="button-gradient">Get Started</button>
       </Link>
       <div className="flex justify-center mt-24 ">
