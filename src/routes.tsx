@@ -3,8 +3,10 @@ import RouteWrapper from "./components/RouteWrapper";
 import MainLoader from "./components/MainLoader";
 import Registration from "./pages/Registration";
 import { ROUTES } from "./constants/routes";
+import Login from "./pages/Login";
 
 const Home = lazy(() => import("./pages/Home"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 const About = lazy(() => import("./pages/About"));
 
 const errorFallback = () => <div>Error: Add skeleton loader here</div>;
@@ -26,10 +28,26 @@ export const appRoutes = [
     ),
   },
   {
+    path: ROUTES.LOGIN,
+    element: (
+      <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
+        <Login />
+      </RouteWrapper>
+    ),
+  },
+  {
     path: ROUTES.ABOUT,
     element: (
       <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
         <About />
+      </RouteWrapper>
+    ),
+  },
+  {
+    path: ROUTES.DASHBOARD,
+    element: (
+      <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
+        <Dashboard />
       </RouteWrapper>
     ),
   },

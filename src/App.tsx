@@ -16,7 +16,7 @@ const App = () => {
         ))}
       </Routes>
 
-      {isAuthenticated && <Footer />}
+      {!isAuthenticated && <Footer />}
     </div>
   );
 };

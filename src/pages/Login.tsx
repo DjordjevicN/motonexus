@@ -1,67 +1,53 @@
 import { useForm } from "react-hook-form";
-import { UserFormData } from "../features/auth/types/registrationTypes";
+import { Link, useNavigate } from "react-router";
+import { ROUTES } from "../constants/routes";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router";
-import { ROUTES } from "../constants/routes";
 
-const Registration = () => {
+type LoginUserTypes = {
+  email: string;
+  password: string;
+};
+
+const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<UserFormData>({
+  } = useForm<LoginUserTypes>({
     mode: "onSubmit",
     defaultValues: {
-      displayName: "",
       email: "",
       password: "",
     },
   });
 
-  const registerUser = async (data: UserFormData) => {
-    const res = await axios.post("http://localhost:4000/users", data);
-    return res.data;
-  };
-
-  const { mutate } = useMutation({
-    mutationFn: (data: UserFormData) => registerUser(data),
-    onError: (error) => {
-      console.error("Registration failed:", error);
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data: LoginUserTypes) => {
+      const res = await axios.post("http://localhost:4000/users/login", data, {
+        withCredentials: true,
+      });
+      return res.data;
     },
     onSuccess: (data) => {
-      console.log("Registration successful:", data);
+      console.log("Login success:", data);
       reset();
+      navigate(ROUTES.DASHBOARD);
+    },
+    onError: (err) => {
+      console.error("Login failed:", err);
     },
   });
 
-  const onSubmit = (data: UserFormData) => {
+  const handleLogin = (data: LoginUserTypes) => {
     mutate(data);
   };
-
+  if (isPending) return <div>Loading...</div>;
   return (
     <div className="flex justify-center items-center min-h-[100vh] w-full">
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full">
-        <div className="flex flex-col mb-4">
-          <label htmlFor="displayName">Display Name</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
-            placeholder="Enter your display name"
-            type="text"
-            id="displayName"
-            {...register("displayName", {
-              required: "Display name is required",
-              minLength: { value: 3, message: "At least 3 characters" },
-            })}
-          />
-          {errors.displayName && (
-            <span className="text-red-500 text-sm">
-              {errors.displayName.message}
-            </span>
-          )}
-        </div>
-
+      <form onSubmit={handleSubmit(handleLogin)} className="max-w-md w-full">
         <div className="mb-4 flex flex-col">
           <label htmlFor="email">Email</label>
           <input
@@ -107,8 +93,12 @@ const Registration = () => {
             {isSubmitting ? "Submitting..." : "Continue"}
           </button>
 
-          <Link to={ROUTES.LOGIN} className="text-blue-500 mt-2 cursor-pointer">
-            I have an account
+          <Link
+            to={ROUTES.REGISTER}
+            type="button"
+            className="text-blue-500 mt-2 cursor-pointer"
+          >
+            I need to create an account
           </Link>
         </div>
       </form>
@@ -116,4 +106,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;
