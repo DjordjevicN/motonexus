@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router";
 import { ROUTES } from "../constants/routes";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../features/auth/authSlice";
 
 type LoginUserTypes = {
   email: string;
@@ -10,6 +12,7 @@ type LoginUserTypes = {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -19,8 +22,8 @@ const Login = () => {
   } = useForm<LoginUserTypes>({
     mode: "onSubmit",
     defaultValues: {
-      email: "",
-      password: "",
+      email: "nikola@gmail.com",
+      password: "djalokin3223",
     },
   });
 
@@ -32,7 +35,8 @@ const Login = () => {
       return res.data;
     },
     onSuccess: (data) => {
-      console.log("Login success:", data);
+      const { user } = data;
+      dispatch(setAuth(user));
       reset();
       navigate(ROUTES.DASHBOARD);
     },

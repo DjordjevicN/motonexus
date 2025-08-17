@@ -6,7 +6,7 @@ import { ROUTES } from "./constants/routes";
 import Login from "./pages/Login";
 
 const Home = lazy(() => import("./pages/Home"));
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const About = lazy(() => import("./pages/About"));
 
 const errorFallback = () => <div>Error: Add skeleton loader here</div>;

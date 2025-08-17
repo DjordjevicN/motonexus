@@ -1,22 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams, useLocation } from "react-router-dom";
 import { appRoutes } from "./routes";
-import TopBar from "./components/TopBar";
 import Footer from "./components/Footer";
 import "./App.css";
+import SidebarNavigation from "./components/navigation/SidebarNavigation";
 
 const App = () => {
-  const isAuthenticated = false;
-
+  const location = useLocation();
+  const hideNavigation = ["/", "/login", "/register"].includes(
+    location.pathname
+  );
   return (
-    <div className="app">
-      {isAuthenticated && <TopBar />}
-      <Routes>
-        {appRoutes.map(({ path, element }) => (
-          <Route key={path} path={path} element={element} />
-        ))}
-      </Routes>
+    <div className="w-full">
+      <div className="flex gap-4 w-full">
+        {!hideNavigation && <SidebarNavigation />}
+        <div className="w-full">
+          <Routes>
+            {appRoutes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))}
+          </Routes>
+        </div>
+      </div>
 
-      {!isAuthenticated && <Footer />}
+      <Footer />
     </div>
   );
 };
