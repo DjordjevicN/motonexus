@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@layer base {
+  body {
+    @apply text-white bg-black; /* or bg-neutral-900 for dark gray */
+  }
+}
 @theme {
   --color-white: #d9d9d9;
   --color-black: #0a0a0a;

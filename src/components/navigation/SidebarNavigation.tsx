@@ -32,7 +32,7 @@ const SidebarNavigation = () => {
         </nav>
       </div>
 
-      <div className="fixed w-full h-screen  top-0 lg:hidden">
+      <div className="fixed w-full top-0 lg:hidden">
         <IoMenuOutline
           color="white"
           size={24}

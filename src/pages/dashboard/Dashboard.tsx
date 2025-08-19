@@ -1,4 +1,4 @@
-import React from "react";
+import EventCard from "./EventCard";
 const events = [
   { id: 1, title: "Event 1", date: "2023-10-01" },
   { id: 2, title: "Event 2", date: "2023-10-02" },
@@ -6,17 +6,19 @@ const events = [
 ];
 const Dashboard = () => {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Upcoming Events</p>
+    <div className="m-4 min-h-screen">
+      <h1 className="text-3xl font-bold text-white mb-6">Dashboard</h1>
+      <p className="text-gray-500 mb-3">Upcoming Events</p>
       <div>
         {events.map((event) => (
-          <p key={event.id}>
-            {event.title} - {event.date}
-          </p>
+          <EventCard
+            key={event.id}
+            title={event.title}
+            date={event.date}
+            id={event.id}
+          />
         ))}
       </div>
-      <p>More features coming soon!</p>
     </div>
   );
 };
