@@ -1,52 +1,64 @@
-import React from "react";
 import NavItem from "./NavItem";
 import { useLocation } from "react-router";
+import { navRoutes } from "./navRoutes";
+import { IoMenuOutline } from "react-icons/io5";
+import { useCallback, useState } from "react";
 
 const SidebarNavigation = () => {
   const location = useLocation();
-  const navRoutes = [
-    {
-      path: "/dashboard",
-      label: "Dashboard",
-      status: "active",
-    },
-    {
-      path: "/profile",
-      label: "Profile",
-      status: "active",
-    },
-    {
-      path: "/calendar",
-      label: "Calendar",
-      status: "inactive",
-    },
-    {
-      path: "/events",
-      label: "Events",
-      status: "inactive",
-    },
-    {
-      path: "/trips",
-      label: "Trips",
-      status: "inactive",
-    },
-  ];
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCloseMenu = useCallback(() => {
+    setIsOpen(false);
+  }, []);
   return (
-    <div className="w-[320px] bg-card h-screen pl-6 flex flex-col justify-center">
-      <nav className="">
-        {navRoutes.map((route) => {
-          return (
-            <NavItem
-              key={route.path}
-              label={route.label}
-              status={route.status}
-              path={route.path}
-              currentPath={location.pathname}
-            />
-          );
-        })}
-      </nav>
-    </div>
+    <>
+      <div className="w-[320px] bg-card h-screen pl-6 pt-4 hidden lg:block">
+        <div className="flex gap-3 items-center">
+          <h1 className="text-yellow-500 font-black text-2xl">MotoNexus</h1>
+        </div>
+        <nav className="mt-[30%]">
+          {navRoutes.map((route) => {
+            return (
+              <NavItem
+                key={route.path}
+                label={route.label}
+                status={route.status}
+                path={route.path}
+                currentPath={location.pathname}
+              />
+            );
+          })}
+        </nav>
+      </div>
+
+      <div className="fixed w-full h-screen  top-0 lg:hidden">
+        <IoMenuOutline
+          color="white"
+          size={24}
+          className="fixed top-6 right-6"
+          onClick={() => setIsOpen(!isOpen)}
+        />
+        {isOpen && (
+          <div className="flex justify-center items-center h-screen bg-card">
+            <div>
+              {navRoutes.map((route) => {
+                return (
+                  <NavItem
+                    key={route.path}
+                    label={route.label}
+                    status={route.status}
+                    path={route.path}
+                    currentPath={location.pathname}
+                    handleCloseMenu={handleCloseMenu}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

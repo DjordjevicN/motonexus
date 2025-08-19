@@ -5,6 +5,9 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../features/auth/authSlice";
+import logo from "../assets/logo.svg";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 type LoginUserTypes = {
   email: string;
@@ -50,62 +53,43 @@ const Login = () => {
   };
   if (isPending) return <div>Loading...</div>;
   return (
-    <div className="flex justify-center items-center min-h-[100vh] w-full">
-      <form onSubmit={handleSubmit(handleLogin)} className="max-w-md w-full">
-        <div className="mb-4 flex flex-col">
-          <label htmlFor="email">Email</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
-            placeholder="Enter your email"
+    <div className="flex justify-center items-center min-h-[100vh] w-full bg-black">
+      <div className="min-w-[300px] lg:min-w-[400px]">
+        <img src={logo} alt="" className="m-auto mb-20" width={100} />
+        <form onSubmit={handleSubmit(handleLogin)} className="max-w-md w-full">
+          <Input
+            label="Email"
             type="email"
             id="email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email address",
-              },
-            })}
+            register={register}
+            errors={errors}
           />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
-        </div>
-        <div className="mb-4 flex flex-col">
-          <label htmlFor="password">Password</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
+
+          <Input
+            label="Password"
             type="password"
             id="password"
-            placeholder="Enter your password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: { value: 6, message: "Min 6 characters" },
-            })}
+            register={register}
+            errors={errors}
           />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-        <div className="flex justify-between items-center">
-          <button
-            className="bg-blue-500 text-white p-2 rounded cursor-pointer"
-            type="submit"
-          >
-            {isSubmitting ? "Submitting..." : "Continue"}
-          </button>
+          <div className="flex justify-between items-center mt-8">
+            <Button
+              label={isSubmitting ? "Submitting..." : "Continue"}
+              onClick={handleSubmit(handleLogin)}
+              disabled={isSubmitting}
+              loading={isSubmitting}
+            />
 
-          <Link
-            to={ROUTES.REGISTER}
-            type="button"
-            className="text-blue-500 mt-2 cursor-pointer"
-          >
-            I need to create an account
-          </Link>
-        </div>
-      </form>
+            <Link
+              to={ROUTES.REGISTER}
+              type="button"
+              className="text-blue-500 mt-2 cursor-pointer"
+            >
+              I need to create an account
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

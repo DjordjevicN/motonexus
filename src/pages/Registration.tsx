@@ -1,11 +1,22 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { UserFormData } from "../features/auth/types/registrationTypes";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ROUTES } from "../constants/routes";
+import logo from "../assets/logo.svg";
+
+import Button from "../components/Button";
+import { useNotify } from "../hooks/useNotify";
+import Input from "../components/Input";
+import { API_URL } from "../constants/urls";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../features/auth/authSlice";
 
 const Registration = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const notify = useNotify();
   const {
     register,
     handleSubmit,
@@ -21,7 +32,7 @@ const Registration = () => {
   });
 
   const registerUser = async (data: UserFormData) => {
-    const res = await axios.post("http://localhost:4000/users", data);
+    const res = await axios.post(`${API_URL}/users`, data);
     return res.data;
   };
 
@@ -29,10 +40,15 @@ const Registration = () => {
     mutationFn: (data: UserFormData) => registerUser(data),
     onError: (error) => {
       console.error("Registration failed:", error);
+      notify.error("Registration failed!");
     },
     onSuccess: (data) => {
-      console.log("Registration successful:", data);
       reset();
+      notify.success("Registration successful!");
+      dispatch(setAuth(data));
+      setTimeout(() => {
+        navigate(ROUTES.DASHBOARD);
+      }, 2000);
     },
   });
 
@@ -41,77 +57,51 @@ const Registration = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[100vh] w-full">
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full">
-        <div className="flex flex-col mb-4">
-          <label htmlFor="displayName">Display Name</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
-            placeholder="Enter your display name"
+    <div className="flex bg-black justify-center items-center min-h-[100vh] w-full">
+      <div className="min-w-[300px] lg:min-w-[400px]">
+        <img src={logo} alt="" className="m-auto mb-20" width={100} />
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full">
+          <Input
+            label="Display Name"
             type="text"
             id="displayName"
-            {...register("displayName", {
-              required: "Display name is required",
-              minLength: { value: 3, message: "At least 3 characters" },
-            })}
+            register={register}
+            errors={errors}
           />
-          {errors.displayName && (
-            <span className="text-red-500 text-sm">
-              {errors.displayName.message}
-            </span>
-          )}
-        </div>
 
-        <div className="mb-4 flex flex-col">
-          <label htmlFor="email">Email</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
-            placeholder="Enter your email"
+          <Input
+            label="Email"
             type="email"
             id="email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email address",
-              },
-            })}
+            register={register}
+            errors={errors}
           />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
-        </div>
-        <div className="mb-4 flex flex-col">
-          <label htmlFor="password">Password</label>
-          <input
-            className="border-b border-b-gray-300 p-2 focus:outline-none"
+
+          <Input
+            label="Password"
             type="password"
             id="password"
-            placeholder="Enter your password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: { value: 6, message: "Min 6 characters" },
-            })}
+            register={register}
+            errors={errors}
           />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-        <div className="flex justify-between items-center">
-          <button
-            className="bg-blue-500 text-white p-2 rounded cursor-pointer"
-            type="submit"
-          >
-            {isSubmitting ? "Submitting..." : "Continue"}
-          </button>
 
-          <Link to={ROUTES.LOGIN} className="text-blue-500 mt-2 cursor-pointer">
-            I have an account
-          </Link>
-        </div>
-      </form>
+          <div className="flex justify-between items-center mt-8">
+            <Button
+              label={isSubmitting ? "Submitting..." : "Continue"}
+              onClick={handleSubmit(onSubmit)}
+              disabled={isSubmitting}
+              loading={isSubmitting}
+            />
+
+            <Link
+              to={ROUTES.LOGIN}
+              className="text-main-blue mt-2 cursor-pointer"
+            >
+              I have an account
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,22 @@
 @import "tailwindcss";
 @theme {
-  --color-background: #0a0a0a;
-  --color-foreground: #ffffff;
-  --color-border: #cccccc;
+  --color-white: #d9d9d9;
+  --color-black: #0a0a0a;
   --color-card: #181818;
+  --color-border: #343434;
+  --color-text: #868686;
+  --color-muted-dark: #161616;
+  --color-main-blue: #28a3eb;
+}
+.body {
+  background-color: black;
+}
+label {
+  color: white;
+}
+input {
+  color: white;
+}
+input::placeholder {
+  color: gray;
 }
