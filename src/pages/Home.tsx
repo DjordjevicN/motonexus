@@ -5,15 +5,15 @@ import { ROUTES } from "../constants/routes";
 
 const Home = () => {
   return (
-    <div className="px-12 standardMaxWidth">
+    <div className="px-12 standardMaxWidth text-white">
       <div className="flex justify-between items-center p-4">
         <Logo />
         <Link to={ROUTES.REGISTER}>Login / Register</Link>
       </div>
-      <h1 className="text-6xl font-bold mt-32 text-center">
+      <h1 className="text-6xl font-bold mt-32 text-center text-white">
         Organize Rides & Ride Together.
       </h1>
-      <p className="mt-10 text-center text-lg max-w-6xl mx-auto text-gray80 ">
+      <p className="mt-10 text-center text-lg max-w-6xl mx-auto text-text ">
         MotoNexus is a modern platform designed for motorcycle enthusiasts to
         effortlessly organize meetups, create travel plans, and collaborate
         within riding organizations. Whether you're hosting local meetups or
@@ -33,7 +33,7 @@ const Home = () => {
         <h2 className="text-5xl font-semibold text-center">
           What Can You Do With MotoNexus?
         </h2>
-        <p className="mt-10 text-center text-lg max-w-6xl mx-auto text-gray80 ">
+        <p className="mt-10 text-center text-lg max-w-6xl mx-auto text-text ">
           Whether you're planning a quick local ride or a cross-country
           adventure, MotoNexus gives you the tools to coordinate every detail.
           Built with riders in mind, every feature is designed to make planning
@@ -43,15 +43,15 @@ const Home = () => {
 
       <div className="flex items-center mt-52 gap-16">
         <div>
-          <h3 className="text-2xl text-gray80 font-semibold">
+          <h3 className="text-2xl text-text font-semibold">
             Effortless Ride Meetups
           </h3>
-          <p className="text-gray80 mt-5">
+          <p className="text-text mt-5">
             Create, join, and manage motorcycle meetups with ease. Whether it's
             a casual weekend ride or a large community event, MotoNexus lets
             you:
           </p>
-          <ul className="text-gray80 mt-2">
+          <ul className="text-text mt-2">
             <li>- Schedule meetups with precise dates</li>
             <li>- Control who can attend (open or by invitation)</li>
             <li>
@@ -67,14 +67,14 @@ const Home = () => {
 
       <div className="flex flex-row-reverse items-center mt-52 gap-16">
         <div>
-          <h3 className="text-2xl text-gray80 font-semibold">
+          <h3 className="text-2xl text-text font-semibold">
             Structure Through Riding Organizations
           </h3>
-          <p className="text-gray80 mt-5">
+          <p className="text-text mt-5">
             Form or join motorcycle organizations to ride with your crew. Within
             each organization, you can:
           </p>
-          <ul className="text-gray80 mt-2">
+          <ul className="text-text mt-2">
             <li>- Manage members and assign roles</li>
             <li>- Create meetups on behalf of the organization</li>
             <li>
@@ -91,14 +91,14 @@ const Home = () => {
 
       <div className="flex items-center mt-52 gap-16">
         <div>
-          <h3 className="text-2xl text-gray80 font-semibold">
+          <h3 className="text-2xl text-text font-semibold">
             Advanced Trip Planning (Coming Soon)
           </h3>
-          <p className="text-gray80 mt-5">
+          <p className="text-text mt-5">
             Trips are multi-day ride events with deep planning capabilities.
             Perfect for cross-country tours, these allow you to:
           </p>
-          <ul className="text-gray80 mt-2">
+          <ul className="text-text mt-2">
             <li>- Plan each day of the ride with routes and stops</li>
             <li>- See who's riding and what they’re bringing</li>
             <li>- Organize sleeping arrangements (who sleeps with whom)</li>
