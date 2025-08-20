@@ -13,7 +13,7 @@ const SidebarNavigation = () => {
   }, []);
   return (
     <>
-      <div className="w-[320px] bg-card h-screen pl-6 pt-4 hidden lg:block">
+      <div className="min-w-[240px] w-[320px] bg-card h-screen pl-6 pt-4 hidden lg:block">
         <div className="flex gap-3 items-center">
           <h1 className="text-accent font-black text-2xl">MotoNexus</h1>
         </div>
