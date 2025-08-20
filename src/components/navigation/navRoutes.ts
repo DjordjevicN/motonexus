@@ -17,7 +17,7 @@ export const navRoutes = [
   {
     path: "/calendar",
     label: "Calendar",
-    status: "Soon",
+    status: "",
   },
   {
     path: "/trips",
