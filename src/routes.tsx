@@ -6,6 +6,7 @@ import { ROUTES } from "./constants/routes";
 import Login from "./pages/Login";
 import EventDetails from "./pages/EventDetails";
 import Calendar from "./pages/Calendar";
+import UserProfile from "./pages/UserProfile";
 
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
@@ -66,6 +67,14 @@ export const appRoutes = [
     element: (
       <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
         <EventDetails />
+      </RouteWrapper>
+    ),
+  },
+  {
+    path: ROUTES.USER_PROFILE,
+    element: (
+      <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
+        <UserProfile />
       </RouteWrapper>
     ),
   },

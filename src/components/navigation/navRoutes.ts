@@ -10,7 +10,7 @@ export const navRoutes = [
     status: "",
   },
   {
-    path: "/profile",
+    path: "/user",
     label: "Profile",
     status: "",
   },
