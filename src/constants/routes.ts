@@ -4,5 +4,6 @@ export const ROUTES = {
   LOGIN: "/login",
   ABOUT: "/about",
   DASHBOARD: "/dashboard",
+  EVENT_DETAILS: "/event/:id",
   NOT_FOUND: "*",
 };

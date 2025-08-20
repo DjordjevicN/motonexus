@@ -12,6 +12,7 @@
   --color-text: #868686;
   --color-muted-dark: #161616;
   --color-main-blue: #28a3eb;
+  --color-accent: #ffdd55;
 }
 .body {
   background-color: black;
@@ -24,4 +25,7 @@ input {
 }
 input::placeholder {
   color: gray;
+}
+.leaflet-control-attribution a {
+  display: none;
 }
