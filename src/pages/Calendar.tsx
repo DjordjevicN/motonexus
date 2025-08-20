@@ -9,6 +9,7 @@ import {
   isWithinInterval,
 } from "date-fns";
 import { memo, useEffect, useRef } from "react";
+import EventSlip from "../features/calendar/components/EventSlip";
 
 const Calendar = () => {
   const monthRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -19,14 +20,14 @@ const Calendar = () => {
   const events = [
     {
       id: "1",
-      title: "Event 1",
+      title: "Event 1 asd asd asd asd asdasdasd asda sda sdasd ",
       startDate: "2025-01-05",
       endDate: "2025-01-05",
       country: "USA",
     },
     {
       id: "2",
-      title: "Event 2",
+      title: "Event 2 asd asd asd asd asdasdasd asda sda sdasd ",
       startDate: "2025-01-02",
       endDate: "2025-01-02",
       country: "Canada",
@@ -45,8 +46,8 @@ const Calendar = () => {
   }, []);
   return (
     <>
-      <div className="mt-4 h-screen flex flex-col pr-4">
-        <div className="flex flex-col gap-8  overflow-auto min-w-[1400px] lg:overflow-y-auto">
+      <div className="mt-20 h-screen flex flex-col pr-4 ">
+        <div className="flex flex-col gap-8  overflow-auto min-w-[760px] lg:overflow-y-auto">
           {months.map((month, index) => {
             const monthStart = startOfMonth(month);
             const monthEnd = endOfMonth(month);
@@ -107,7 +108,7 @@ const Calendar = () => {
                         } ${dayEvents.length ? "" : ""}`}
                         title={`${dayEvents.length} event(s)`}
                         onClick={() => {
-                          console.log(dayEvents);
+                          console.log(day.toString());
                         }}
                       >
                         <div className={`flex gap-2 items-center mb-2`}>
@@ -119,7 +120,7 @@ const Calendar = () => {
                         {dayEvents.length > 0 && (
                           <div className="mt-2 overflow-y-scroll max-h-[300px]">
                             {dayEvents.map((event) => {
-                              return <div key={event.id}>{event.title}</div>;
+                              return <EventSlip key={event.id} event={event} />;
                             })}
                           </div>
                         )}
