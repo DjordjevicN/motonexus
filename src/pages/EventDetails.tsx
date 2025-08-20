@@ -27,7 +27,7 @@ const EventDetails = () => {
           </p>
         </div>
         <div className="flex justify-between mt-3 flex-col-reverse lg:flex-row gap-4 ">
-          <p className="text-text max-w-3xl min-h-[200px] whitespace-pre-line lg:mb-6 my-6 bg-card p-4 max-h-[300px] overflow-y-auto">
+          <p className="text-text max-w-3xl min-h-[200px] whitespace-pre-line lg:mb-6 my-6 max-h-[300px] overflow-y-auto">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
             maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
             asperiores quo facere alias deleniti aperiam odio dolore a
@@ -92,7 +92,7 @@ const EventDetails = () => {
             sint repudiandae quia unde asperiores quo facere alias deleniti
             aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor sit
           </p>
-          <div className="bg-card p-4 rounded min-h-[200px] min-w-[300px] max-w-[400px] flex flex-col justify-between">
+          <div className="bg-card p-4 rounded min-h-[200px] min-w-[300px] max-w-[400px] flex flex-col justify-between my-6">
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <div className="w-[16px] h-[16px]">
