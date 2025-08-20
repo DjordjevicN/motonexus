@@ -6,5 +6,6 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   EVENT_DETAILS: "/event/:id",
   CALENDAR: "/calendar",
+  USER_PROFILE: "/user",
   NOT_FOUND: "*",
 };
