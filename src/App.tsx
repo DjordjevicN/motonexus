@@ -40,7 +40,7 @@ const App = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

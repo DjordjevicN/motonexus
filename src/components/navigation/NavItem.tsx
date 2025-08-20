@@ -46,7 +46,7 @@ const NavItem = ({
           >
             {label}
           </p>
-          <p className="text-yellow-500 text-xs">{status}</p>
+          <p className="text-accent text-xs">{status}</p>
         </div>
       </Link>
     </div>

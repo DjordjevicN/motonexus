@@ -15,7 +15,7 @@ const SidebarNavigation = () => {
     <>
       <div className="w-[320px] bg-card h-screen pl-6 pt-4 hidden lg:block">
         <div className="flex gap-3 items-center">
-          <h1 className="text-yellow-500 font-black text-2xl">MotoNexus</h1>
+          <h1 className="text-accent font-black text-2xl">MotoNexus</h1>
         </div>
         <nav className="mt-[30%]">
           {navRoutes.map((route) => {
