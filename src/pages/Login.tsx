@@ -8,6 +8,7 @@ import { setAuth } from "../features/auth/authSlice";
 import logo from "../assets/logo.svg";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { API_ROUTES, baseUrl } from "../constants/apiRoutes";
 
 type LoginUserTypes = {
   email: string;
@@ -32,7 +33,7 @@ const Login = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: LoginUserTypes) => {
-      const res = await axios.post("http://localhost:4000/users/login", data, {
+      const res = await axios.post(`${baseUrl}${API_ROUTES.LOGIN}`, data, {
         withCredentials: true,
       });
       return res.data;

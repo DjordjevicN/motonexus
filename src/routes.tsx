@@ -11,6 +11,7 @@ import UserProfile from "./pages/UserProfile";
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 const About = lazy(() => import("./pages/About"));
+const MotorcycleDetails = lazy(() => import("./pages/MotorcycleDetails"));
 
 const errorFallback = () => <div>Error: Add skeleton loader here</div>;
 export const appRoutes = [
@@ -75,6 +76,14 @@ export const appRoutes = [
     element: (
       <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
         <UserProfile />
+      </RouteWrapper>
+    ),
+  },
+  {
+    path: ROUTES.MOTORCYCLE_DETAILS,
+    element: (
+      <RouteWrapper fallback={<MainLoader />} errorFallback={errorFallback}>
+        <MotorcycleDetails />
       </RouteWrapper>
     ),
   },

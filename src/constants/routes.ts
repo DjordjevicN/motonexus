@@ -5,6 +5,7 @@ export const ROUTES = {
   ABOUT: "/about",
   DASHBOARD: "/dashboard",
   EVENT_DETAILS: "/event/:id",
+  MOTORCYCLE_DETAILS: "/motorcycles/:id",
   CALENDAR: "/calendar",
   USER_PROFILE: "/user",
   NOT_FOUND: "*",
