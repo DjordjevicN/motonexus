@@ -1,12 +1,11 @@
-import React from "react";
 import { useParams } from "react-router";
 import banner from "../assets/banner.jpeg";
-import Button from "../components/Button";
 import MyMap from "../components/MyMap";
 import { CiCalendarDate } from "react-icons/ci";
 import { CiLocationOn } from "react-icons/ci";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { GiFullMotorcycleHelmet } from "react-icons/gi";
+import { Button } from "@/components/ui/button";
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -28,65 +27,6 @@ const EventDetails = () => {
         </div>
         <div className="flex justify-between mt-3 flex-col-reverse lg:flex-row gap-4 ">
           <p className="text-text max-w-3xl min-h-[200px] whitespace-pre-line lg:mb-6 my-6 max-h-[300px] overflow-y-auto">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
-            reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
-            sint repudiandae quia unde asperiores quo facere alias deleniti
-            aperiam odio dolore a reprehenderit fugit. Lorem ipsum dolor
-            sitLorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-            maxime cumque? Itaque, animi ab minus sint repudiandae quia unde
-            asperiores quo facere alias deleniti aperiam odio dolore a
             reprehenderit fugit. Lorem ipsum dolor sit amet consectetur
             adipisicing elit. Officia, maxime cumque? Itaque, animi ab minus
             sint repudiandae quia unde asperiores quo facere alias deleniti
@@ -122,11 +62,9 @@ const EventDetails = () => {
                 <p className="text-text text-sm">Unlimited</p>
               </div>
             </div>
-            <Button
-              label="Attend"
-              onClick={handleAttend}
-              className="w-full mt-4"
-            />
+            <Button onClick={handleAttend} className="w-full mt-4">
+              Attend
+            </Button>
           </div>
         </div>
         <div className="w-full h-[100px] mt-6">

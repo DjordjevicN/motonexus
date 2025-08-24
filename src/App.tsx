@@ -1,15 +1,23 @@
-import { Routes, Route, useParams, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { appRoutes } from "./routes";
-import Footer from "./components/Footer";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import SidebarNavigation from "./components/navigation/SidebarNavigation";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
+import { useEffect } from "react";
 
 const App = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const hideNavigation = ["/", "/login", "/register"].includes(
     location.pathname
   );
+  const { auth } = useSelector((state: RootState) => state.auth);
+  const isAuth = !!auth;
+  useEffect(() => {
+    navigate(isAuth ? "/dashboard" : "/login");
+  }, [isAuth]);
   return (
     <div className="w-full bg-black">
       <div className="flex gap-4 w-full">
@@ -39,8 +47,6 @@ const App = () => {
           />
         </div>
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 };

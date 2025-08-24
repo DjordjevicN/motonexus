@@ -1,4 +1,5 @@
 import React from "react";
+import { Input } from "./ui/input";
 type INPUT_PROPS = {
   label: string;
   type: string;
@@ -6,13 +7,13 @@ type INPUT_PROPS = {
   register: any;
   errors: any;
 };
-const Input = ({ label, type, id, register, errors }: INPUT_PROPS) => {
+const MyInput = ({ label, type, id, register, errors }: INPUT_PROPS) => {
   return (
     <div className="flex flex-col mb-4">
       <label htmlFor={id} className="mb-2">
         {label}
       </label>
-      <input
+      <Input
         className="border rounded-sm border-border p-2 focus:outline-none"
         placeholder={`Enter your ${label.toLowerCase()}`}
         type={type}
@@ -29,4 +30,4 @@ const Input = ({ label, type, id, register, errors }: INPUT_PROPS) => {
   );
 };
 
-export default Input;
+export default MyInput;
