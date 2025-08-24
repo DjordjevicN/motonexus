@@ -13,13 +13,13 @@ const Input = ({ label, type, id, register, errors }: INPUT_PROPS) => {
         {label}
       </label>
       <input
-        className="border rounded-sm border-text p-2 focus:outline-none"
+        className="border rounded-sm border-border p-2 focus:outline-none"
         placeholder={`Enter your ${label.toLowerCase()}`}
         type={type}
         id={id}
         {...register(id, {
           required: `${label} is required`,
-          minLength: { value: 3, message: "At least 3 characters" },
+          minLength: { value: 1, message: "At least 1 character" },
         })}
       />
       {errors[id] && (
