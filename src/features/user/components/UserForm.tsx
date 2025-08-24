@@ -1,11 +1,13 @@
-import Input from "../../../components/Input";
 import { useForm } from "react-hook-form";
-import Button from "../../../components/Button";
+
 import { memo } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../../constants/apiRoutes";
 import { IUser } from "../../../types/userTypes";
+import MyInput from "@/components/MyInput";
+import { Button } from "@/components/ui/button";
+import { IoCloseOutline } from "react-icons/io5";
 
 type IUserFormData = {
   displayName: string;
@@ -58,30 +60,38 @@ const UserForm = ({
   return (
     <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center">
       <div className="bg-card min-w-[320px] p-6">
-        <button onClick={close}>close</button>
+        <div className="text-end">
+          <Button
+            variant={"ghost"}
+            onClick={() => close()}
+            className="cursor-pointer"
+          >
+            <IoCloseOutline />
+          </Button>
+        </div>
         <form onSubmit={handleSubmit(handleUpdate)}>
-          <Input
+          <MyInput
             label="Name"
             type="text"
             id="displayName"
             register={register}
             errors={errors}
           />
-          <Input
+          <MyInput
             label="Email"
             type="email"
             id="email"
             register={register}
             errors={errors}
           />
-          <Input
+          <MyInput
             label="City"
             type="text"
             id="city"
             register={register}
             errors={errors}
           />
-          <Input
+          <MyInput
             label="Country"
             type="text"
             id="country"
@@ -101,7 +111,9 @@ const UserForm = ({
             </select>
           </div>
 
-          <Button disabled={isSubmitting} label="Update" type="submit" />
+          <Button disabled={isSubmitting} type="submit">
+            Update
+          </Button>
         </form>
       </div>
     </div>

@@ -5,13 +5,12 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router";
 import { ROUTES } from "../constants/routes";
 import logo from "../assets/logo.svg";
-
-import Button from "../components/Button";
 import { useNotify } from "../hooks/useNotify";
-import Input from "../components/Input";
 import { API_URL } from "../constants/urls";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../features/auth/authSlice";
+import MyInput from "@/components/MyInput";
+import { Button } from "@/components/ui/button";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -61,7 +60,7 @@ const Registration = () => {
       <div className="min-w-[300px] lg:min-w-[400px]">
         <img src={logo} alt="" className="m-auto mb-20" width={100} />
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full">
-          <Input
+          <MyInput
             label="Display Name"
             type="text"
             id="displayName"
@@ -69,7 +68,7 @@ const Registration = () => {
             errors={errors}
           />
 
-          <Input
+          <MyInput
             label="Email"
             type="email"
             id="email"
@@ -77,7 +76,7 @@ const Registration = () => {
             errors={errors}
           />
 
-          <Input
+          <MyInput
             label="Password"
             type="password"
             id="password"
@@ -86,12 +85,9 @@ const Registration = () => {
           />
 
           <div className="flex justify-between items-center mt-8">
-            <Button
-              label={isSubmitting ? "Submitting..." : "Continue"}
-              onClick={handleSubmit(onSubmit)}
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            />
+            <Button onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Continue"}
+            </Button>
 
             <Link
               to={ROUTES.LOGIN}

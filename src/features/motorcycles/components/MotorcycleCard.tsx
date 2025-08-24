@@ -1,32 +1,32 @@
-import React from "react";
 import { IMotorcycle } from "../../../types/motorcycleTypes";
-import banner from "../../../assets/banner.jpeg";
+import z900 from "../../../assets/z900.png";
 import { useNavigate } from "react-router";
+import { Card } from "@/components/ui/card";
 
 const MotorcycleCard = ({ motorcycle }: { motorcycle: IMotorcycle }) => {
   const navigate = useNavigate();
   return (
-    <div
+    <Card
       className="max-w-[330px] p-4 bg-card cursor-pointer"
       onClick={() => navigate(`/motorcycles/${motorcycle._id}`)}
     >
-      <img src={banner} alt="" className="object-cover  " />
-      <h2 className="text-2xl font-semibold mt-3">
+      <img src={z900} alt="" className="object-cover" />
+      <h2 className="text-md font-semibold">
         {motorcycle.make} {motorcycle.model}{" "}
       </h2>
       <div className="text-text">
-        <div className="flex items-center gap-2 mb-3 text-accent">
+        <div className="flex items-center justify-center gap-2 text-accent">
           <p>{motorcycle.engineCapacity}cc</p>
           <p>|</p>
           <p>{motorcycle.horsepower}hp</p>
           <p>|</p>
           <p>~{motorcycle.mileage}km</p>
         </div>
-        <p className="max-h-[110px] overflow-hidden whitespace-pre-line">
+        <p className="max-h-[110px] text-start overflow-hidden whitespace-pre-line">
           {motorcycle.description}
         </p>
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -1,15 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import banner from "../assets/banner.jpeg";
+import z900 from "../assets/z900.png";
 import EventCard from "../features/events/components/EventCard";
-import { IUser } from "../types/userTypes";
 import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "../constants/apiRoutes";
 import { IMotorcycle } from "../types/motorcycleTypes";
 import MotorcycleCard from "../features/motorcycles/components/MotorcycleCard";
-import Button from "../components/Button";
 import { useCallback, useState } from "react";
-import UserForm from "../features/userProfile/components/UserForm";
+import UserForm from "../features/user/components/UserForm";
+import { Button } from "@/components/ui/button";
+import { clearAuth } from "@/features/auth/authSlice";
+import Pill from "@/components/Pill";
+import { LuPlus } from "react-icons/lu";
+import MotorcycleForm from "@/features/motorcycles/components/MotorcycleForm";
 
 const events = [
   { id: 1, title: "Event 1", date: "2023-10-01" },
@@ -17,7 +20,10 @@ const events = [
   { id: 3, title: "Event 3", date: "2023-10-03" },
 ];
 const UserProfile = () => {
+  const dispatch = useDispatch();
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
+  const [isAddMotorcycleModalOpen, setIsAddMotorcycleModalOpen] =
+    useState(false);
   const { auth } = useSelector((state: RootState) => state.auth);
   const userId = auth?._id ?? (auth as any)?.id ?? null;
 
@@ -40,33 +46,49 @@ const UserProfile = () => {
   const toggleEditUserModal = useCallback(() => {
     setIsEditUserModalOpen((prev) => !prev);
   }, []);
+
+  const handleLogout = () => {
+    dispatch(clearAuth());
+  };
+
+  const toggleAddMotorcycle = useCallback(() => {
+    setIsAddMotorcycleModalOpen(!isAddMotorcycleModalOpen);
+  }, [isAddMotorcycleModalOpen]);
   if (!user || !motorcycles) return <div>Loading...</div>;
   return (
     <>
       <div className="text-center overflow-y-auto h-screen">
         <img
-          src={banner}
+          src={z900}
           alt=""
           className="rounded-full object-cover w-[100px] h-[100px] mx-auto mt-20"
         />
-        <div className="flex gap-3 mx-auto w-full items-center mt-6 justify-center">
-          <p className="text-3xl capitalize">
-            {user.displayName} <span>{user.subscription}</span>
-          </p>
-          <Button onClick={toggleEditUserModal} label="Edit Profile" />
+        <div className="w-full mt-6 flex items-center gap-3 justify-center">
+          <p className="text-3xl capitalize">{user.displayName}</p>
+          <Pill>{user.subscription}</Pill>
         </div>
         <p className="text-xs text-text">{user.createdAt}</p>
         <p className="text-xs text-text">
           {user.city}, {user.country}
         </p>
+        <div className="flex gap-3 mx-auto w-full items-center mt-6 justify-center">
+          <Button onClick={toggleEditUserModal}>Edit Profile</Button>
+          <Button onClick={handleLogout}>Logout</Button>
+        </div>
         <div className="mt-10">
           <p className="text-left mb-5 text-text">My motorcycles</p>
-          <div className="flex gap-6  flex-wrap">
+          <div className="flex gap-6 flex-wrap justify-center lg:justify-start">
             {motorcycles.map((motorcycle: IMotorcycle) => {
               return (
                 <MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />
               );
             })}
+            <div
+              onClick={toggleAddMotorcycle}
+              className="border-2 border-dashed flex items-center justify-center min-w-[330px] p-4 bg-card cursor-pointer rounded-xl"
+            >
+              <LuPlus />
+            </div>
           </div>
         </div>
         <div className="max-w-3xl mt-10">
@@ -85,6 +107,9 @@ const UserProfile = () => {
       </div>
       {isEditUserModalOpen && (
         <UserForm user={user} close={toggleEditUserModal} />
+      )}
+      {isAddMotorcycleModalOpen && (
+        <MotorcycleForm close={toggleAddMotorcycle} />
       )}
     </>
   );
