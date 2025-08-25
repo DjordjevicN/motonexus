@@ -81,7 +81,7 @@ const Login = () => {
             <Link
               to={ROUTES.REGISTER}
               type="button"
-              className="text-blue-500 mt-2 cursor-pointer"
+              className="text-accent mt-2 cursor-pointer text-sm lg:text-base"
             >
               I need to create an account
             </Link>

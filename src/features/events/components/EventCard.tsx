@@ -24,8 +24,8 @@ const EventCard = ({ event }: { event: IEvent }) => {
           <p>|</p>
           <p>BIKE MEET</p>
         </div>
-        <h2 className="lg:text-2xl font-semibold mb-2">{event.title}</h2>
-        <div>
+        <div className="text-start">
+          <h2 className="lg:text-2xl font-semibold mb-2">{event.title}</h2>
           <p className="text-xs lg:text-sm text-muted-foreground">
             {event.description}
           </p>

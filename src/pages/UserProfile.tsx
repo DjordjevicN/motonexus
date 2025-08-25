@@ -13,9 +13,12 @@ import Pill from "@/components/Pill";
 import MotorcycleForm from "@/features/motorcycles/components/MotorcycleForm";
 import { IMotorcycle } from "@/features/motorcycles/types/motorcycleTypes";
 import { IEvent } from "@/features/events/types/eventTypes";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
   const [isAddMotorcycleModalOpen, setIsAddMotorcycleModalOpen] =
     useState(false);
@@ -25,8 +28,8 @@ const UserProfile = () => {
   const { data: user } = useQuery({
     queryKey: ["user", userId],
     queryFn: async () => {
-      const response = await fetch(`${baseUrl}/users/${userId}`);
-      return response.json();
+      const response = await axios.get(`${baseUrl}/users/${userId}`);
+      return response.data;
     },
   });
 
@@ -34,8 +37,10 @@ const UserProfile = () => {
     queryKey: ["motorcycles", userId],
     enabled: !!userId,
     queryFn: async () => {
-      const response = await fetch(`${baseUrl}/motorcycles/owner/${userId}`);
-      return response.json();
+      const response = await axios.get(
+        `${baseUrl}/motorcycles/owner/${userId}`
+      );
+      return response.data;
     },
   });
 
@@ -43,8 +48,8 @@ const UserProfile = () => {
     queryKey: ["events", userId],
     enabled: !!userId,
     queryFn: async () => {
-      const response = await fetch(`${baseUrl}/events/owner/${userId}`);
-      return response.json();
+      const response = await axios.get(`${baseUrl}/events/owner/${userId}`);
+      return response.data;
     },
   });
 
@@ -52,13 +57,16 @@ const UserProfile = () => {
     setIsEditUserModalOpen((prev) => !prev);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await axios.post(`${baseUrl}/users/logout`);
     dispatch(clearAuth());
+    navigate("/");
   };
 
   const toggleAddMotorcycle = useCallback(() => {
     setIsAddMotorcycleModalOpen(!isAddMotorcycleModalOpen);
   }, [isAddMotorcycleModalOpen]);
+
   if (!user || !motorcycles || !events) return <div>Loading...</div>;
   return (
     <>
@@ -102,9 +110,9 @@ const UserProfile = () => {
         <div className="max-w-3xl mt-10">
           <p className="text-gray-500 mb-3 text-left">Attending Events</p>
           <div>
-            {events.map((event: IEvent) => (
-              <EventCard key={event._id} event={event} />
-            ))}
+            {events.map((event: IEvent) => {
+              return <EventCard key={event._id} event={event} />;
+            })}
           </div>
         </div>
       </div>
