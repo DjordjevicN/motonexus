@@ -69,10 +69,11 @@ input::placeholder {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-accent: oklab(90.215% -0.01339 0.15411);
+  --color-accent: oklab(64.06500000000001% -0.05776 -0.18882);
 }
 
 :root {
+  --color-accent: oklab(64.06500000000001% -0.05776 -0.18882);
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -148,4 +149,8 @@ input::placeholder {
   body {
     @apply bg-background text-foreground;
   }
+}
+#picker {
+  display: none;
+  color: white;
 }

@@ -7,21 +7,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { memo } from "react";
 
-export const CountrySelect = ({
+const CountrySelect = ({
   value,
   onSelect,
   disabled = false,
+  hideLabel = false,
 }: {
   onSelect: (countryCode: string) => void;
   value?: string;
   disabled?: boolean;
+  hideLabel?: boolean;
 }) => {
   const countries = Country.getAllCountries();
-
   return (
-    <div className="space-y-1 relative z-50">
-      <Label htmlFor="country">Country</Label>
+    <div className="w-full relative z-50">
+      {!hideLabel && <Label htmlFor="country">Country</Label>}
       <Select
         disabled={disabled}
         value={value}
@@ -33,13 +35,16 @@ export const CountrySelect = ({
           <SelectValue placeholder="Select a country" />
         </SelectTrigger>
         <SelectContent className="max-h-60 overflow-y-auto">
-          {countries.map((c) => (
-            <SelectItem key={c.isoCode} value={c.isoCode}>
-              {c.name}
-            </SelectItem>
-          ))}
+          {countries.map((c) => {
+            return (
+              <SelectItem key={c.isoCode} value={c.isoCode}>
+                {c.name}
+              </SelectItem>
+            );
+          })}
         </SelectContent>
       </Select>
     </div>
   );
 };
+export default memo(CountrySelect);

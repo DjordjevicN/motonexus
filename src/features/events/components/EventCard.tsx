@@ -3,15 +3,13 @@ import { useNavigate } from "react-router";
 import { LuLink } from "react-icons/lu";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { IEvent } from "../types/eventTypes";
+import moment from "moment";
 
-type EventCardProps = {
-  id: string | number;
-};
-
-const EventCard = ({ id }: EventCardProps) => {
+const EventCard = ({ event }: { event: IEvent }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/event/${id}`);
+    navigate(`/event/${event._id}`);
   };
   return (
     <Card
@@ -20,33 +18,34 @@ const EventCard = ({ id }: EventCardProps) => {
     >
       <div>
         <div className="flex items-center gap-6 mb-3 text-xs lg:text-sm mt-4 lg:mt-0">
-          <p className="text-accent">99.08.2025</p>
+          <p className="text-accent">
+            {moment(event.startDate).format("DD.MM.YYYY")}
+          </p>
           <p>|</p>
           <p>BIKE MEET</p>
         </div>
-        <h2 className="lg:text-2xl font-semibold mb-2">
-          Mod n' Mini Night (Classic Scooters)
-        </h2>
+        <h2 className="lg:text-2xl font-semibold mb-2">{event.title}</h2>
         <div>
           <p className="text-xs lg:text-sm text-muted-foreground">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            odio, veniam quam repudiandae suscipit nam error atque quae tempora,
-            optio aspernatur assumenda eos quis voluptatem voluptas in totam
-            aliquid nemo!
+            {event.description}
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 lg:items-center mt-3">
           <div className="flex items-center gap-2 !text-xs lg:text-sm">
             <CiLocationOn />
-            <p className="truncate">Ace Café, Stonebridge, NW10 7UD</p>
+            <p className="truncate">{event.address}</p>
           </div>
-          <p className="hidden lg:block">|</p>
-          <div className="flex items-center gap-2">
-            <LuLink />
-            <a className="text-xs lg:text-sm truncate" href="">
-              mamagoca.com
-            </a>
-          </div>
+          {event.link && (
+            <>
+              <p className="hidden lg:block">|</p>
+              <div className="flex items-center gap-2">
+                <LuLink />
+                <a className="text-xs lg:text-sm truncate" href="">
+                  {event.link}
+                </a>
+              </div>
+            </>
+          )}
           <p className="hidden lg:block">|</p>
           <div>
             <Button variant={"ghost"} className="text-xs lg:text-sm truncate">
