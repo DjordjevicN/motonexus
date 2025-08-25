@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
-
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl } from "../../../constants/apiRoutes";
-import { IUser } from "../../../types/userTypes";
 import MyInput from "@/components/MyInput";
 import { Button } from "@/components/ui/button";
 import { IoCloseOutline } from "react-icons/io5";
+import { IUser } from "../types/userTypes";
+import CountrySelect from "@/components/CountrySelect";
 
 type IUserFormData = {
   displayName: string;
@@ -24,6 +24,7 @@ const UserForm = ({
   close: () => void;
   user: IUser | null;
 }) => {
+  const [country, setCountry] = useState<string>(user?.country || "RS");
   const qc = useQueryClient();
   const {
     register,
@@ -53,8 +54,11 @@ const UserForm = ({
     },
   });
   const handleUpdate = (data: IUserFormData) => {
-    console.log(data);
-    mutate(data);
+    const userData = {
+      ...data,
+      country: country,
+    };
+    mutate(userData);
   };
 
   return (
@@ -91,12 +95,10 @@ const UserForm = ({
             register={register}
             errors={errors}
           />
-          <MyInput
-            label="Country"
-            type="text"
-            id="country"
-            register={register}
-            errors={errors}
+
+          <CountrySelect
+            value={country}
+            onSelect={(value) => setCountry(value)}
           />
 
           <div className="flex flex-col mb-4">

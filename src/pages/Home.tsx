@@ -8,7 +8,7 @@ const Home = () => {
     <div className="px-12 standardMaxWidth text-white">
       <div className="flex justify-between items-center p-4">
         <Logo />
-        <Link to={ROUTES.REGISTER}>Login / Register</Link>
+        <Link to={ROUTES.LOGIN}>Login / Register</Link>
       </div>
       <h1 className="text-6xl font-bold mt-32 text-center text-white">
         Organize Rides & Ride Together.
@@ -20,7 +20,7 @@ const Home = () => {
         planning a multi-day road trip, MotoNexus helps you keep everything in
         sync — from dates and participants to gear and hotel bookings.
       </p>
-      <Link to={ROUTES.REGISTER} className="flex justify-center mt-10">
+      <Link to={ROUTES.LOGIN} className="flex justify-center mt-10">
         <button className="button-gradient">Get Started</button>
       </Link>
       <div className="flex justify-center mt-24 ">

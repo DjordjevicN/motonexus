@@ -1,5 +1,6 @@
 export type IUser = {
   id: string;
+  _id?: string;
   displayName: string;
   email: string;
   createdAt?: string;

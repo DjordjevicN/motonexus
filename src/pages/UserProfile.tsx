@@ -4,21 +4,16 @@ import z900 from "../assets/z900.png";
 import EventCard from "../features/events/components/EventCard";
 import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "../constants/apiRoutes";
-import { IMotorcycle } from "../types/motorcycleTypes";
 import MotorcycleCard from "../features/motorcycles/components/MotorcycleCard";
 import { useCallback, useState } from "react";
 import UserForm from "../features/user/components/UserForm";
 import { Button } from "@/components/ui/button";
 import { clearAuth } from "@/features/auth/authSlice";
 import Pill from "@/components/Pill";
-import { LuPlus } from "react-icons/lu";
 import MotorcycleForm from "@/features/motorcycles/components/MotorcycleForm";
+import { IMotorcycle } from "@/features/motorcycles/types/motorcycleTypes";
+import { IEvent } from "@/features/events/types/eventTypes";
 
-const events = [
-  { id: 1, title: "Event 1", date: "2023-10-01" },
-  { id: 2, title: "Event 2", date: "2023-10-02" },
-  { id: 3, title: "Event 3", date: "2023-10-03" },
-];
 const UserProfile = () => {
   const dispatch = useDispatch();
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
@@ -43,6 +38,16 @@ const UserProfile = () => {
       return response.json();
     },
   });
+
+  const { data: events } = useQuery({
+    queryKey: ["events", userId],
+    enabled: !!userId,
+    queryFn: async () => {
+      const response = await fetch(`${baseUrl}/events/owner/${userId}`);
+      return response.json();
+    },
+  });
+
   const toggleEditUserModal = useCallback(() => {
     setIsEditUserModalOpen((prev) => !prev);
   }, []);
@@ -54,7 +59,7 @@ const UserProfile = () => {
   const toggleAddMotorcycle = useCallback(() => {
     setIsAddMotorcycleModalOpen(!isAddMotorcycleModalOpen);
   }, [isAddMotorcycleModalOpen]);
-  if (!user || !motorcycles) return <div>Loading...</div>;
+  if (!user || !motorcycles || !events) return <div>Loading...</div>;
   return (
     <>
       <div className="text-center overflow-y-auto h-screen">
@@ -76,31 +81,29 @@ const UserProfile = () => {
           <Button onClick={handleLogout}>Logout</Button>
         </div>
         <div className="mt-10">
-          <p className="text-left mb-5 text-text">My motorcycles</p>
+          <div className="flex gap-3 items-center">
+            <p className="text-left mb-5 text-text">My motorcycles</p>
+            <Button
+              variant="outline"
+              className="mb-5"
+              onClick={toggleAddMotorcycle}
+            >
+              Add Motorcycle
+            </Button>
+          </div>
           <div className="flex gap-6 flex-wrap justify-center lg:justify-start">
             {motorcycles.map((motorcycle: IMotorcycle) => {
               return (
                 <MotorcycleCard key={motorcycle._id} motorcycle={motorcycle} />
               );
             })}
-            <div
-              onClick={toggleAddMotorcycle}
-              className="border-2 border-dashed flex items-center justify-center min-w-[330px] p-4 bg-card cursor-pointer rounded-xl"
-            >
-              <LuPlus />
-            </div>
           </div>
         </div>
         <div className="max-w-3xl mt-10">
           <p className="text-gray-500 mb-3 text-left">Attending Events</p>
           <div>
-            {events.map((event) => (
-              <EventCard
-                key={event.id}
-                title={event.title}
-                date={event.date}
-                id={event.id}
-              />
+            {events.map((event: IEvent) => (
+              <EventCard key={event._id} event={event} />
             ))}
           </div>
         </div>

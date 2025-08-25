@@ -6,10 +6,18 @@ type INPUT_PROPS = {
   id: string;
   register: any;
   errors: any;
+  required?: boolean;
 };
-const MyInput = ({ label, type, id, register, errors }: INPUT_PROPS) => {
+const MyInput = ({
+  label,
+  type,
+  id,
+  register,
+  errors,
+  required,
+}: INPUT_PROPS) => {
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col mb-4 w-full">
       <label htmlFor={id} className="mb-2">
         {label}
       </label>
@@ -19,7 +27,7 @@ const MyInput = ({ label, type, id, register, errors }: INPUT_PROPS) => {
         type={type}
         id={id}
         {...register(id, {
-          required: `${label} is required`,
+          required: required ? `${label} is required` : false,
           minLength: { value: 1, message: "At least 1 character" },
         })}
       />
