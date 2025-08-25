@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="m-4 min-h-screen">
+    <div className="m-4 max-h-screen overflow-auto">
       <h1 className="text-3xl font-bold text-white mb-6">Dashboard</h1>
       <div>
         <EventFilter value={filters} onApply={(next) => setFilters(next)} />

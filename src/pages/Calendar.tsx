@@ -10,6 +10,9 @@ import {
 } from "date-fns";
 import { memo, useEffect, useRef } from "react";
 import EventSlip from "../features/calendar/components/EventSlip";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { baseUrl } from "@/constants/apiRoutes";
 
 const Calendar = () => {
   const monthRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -17,23 +20,34 @@ const Calendar = () => {
   const months = Array.from({ length: 12 }, (_, i) => new Date(year, i, 1));
 
   const getWeekdayIndex = (date: Date) => (getDay(date) + 6) % 7;
-  const events = [
-    {
-      id: "1",
-      title: "Event 1 asd asd asd asd asdasdasd asda sda sdasd ",
-      startDate: "2025-01-05",
-      endDate: "2025-01-05",
-      country: "USA",
+  // const events = [
+  //   {
+  //     id: "1",
+  //     title: "Event 1 asd asd asd asd asdasdasd asda sda sdasd ",
+  //     startDate: "2025-01-05",
+  //     endDate: "2025-01-05",
+  //     country: "USA",
+  //   },
+  //   {
+  //     id: "2",
+  //     title: "Event 2 asd asd asd asd asdasdasd asda sda sdasd ",
+  //     startDate: "2025-01-02",
+  //     endDate: "2025-01-02",
+  //     country: "Canada",
+  //   },
+  // ];
+  const { data } = useQuery({
+    queryKey: ["events"],
+    queryFn: async () => {
+      const req = await axios.get(`${baseUrl}/events`);
+      return req.data;
     },
-    {
-      id: "2",
-      title: "Event 2 asd asd asd asd asdasdasd asda sda sdasd ",
-      startDate: "2025-01-02",
-      endDate: "2025-01-02",
-      country: "Canada",
-    },
-  ];
-
+  });
+  const events = data?.data ?? [];
+  console.log(events);
+  function normalizeDate(d: Date) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
   useEffect(() => {
     const timeout = setTimeout(() => {
       const currentMonthIndex = new Date().getMonth();
@@ -46,8 +60,11 @@ const Calendar = () => {
   }, []);
   return (
     <>
-      <div className="mt-20 h-screen flex flex-col pr-4 ">
-        <div className="flex flex-col gap-8  overflow-auto min-w-[760px] lg:overflow-y-auto">
+      <div className="h-screen flex overflow-auto flex-col mr-4">
+        <p className="text-3xl font-semibold text-white my-10">
+          Full year Calendar
+        </p>
+        <div className="flex flex-col gap-8 min-w-[760px] lg:overflow-y-auto">
           {months.map((month, index) => {
             const monthStart = startOfMonth(month);
             const monthEnd = endOfMonth(month);
@@ -91,8 +108,8 @@ const Calendar = () => {
                   {/* Days of the month */}
                   {days.map((day) => {
                     const dayEvents = [...events].filter((ev) => {
-                      const eventStart = parseISO(ev.startDate);
-                      const eventEnd = parseISO(ev.endDate);
+                      const eventStart = normalizeDate(parseISO(ev.startDate));
+                      const eventEnd = normalizeDate(parseISO(ev.endDate));
                       return isWithinInterval(day, {
                         start: eventStart,
                         end: eventEnd,
@@ -104,7 +121,7 @@ const Calendar = () => {
                       <div
                         key={day.toString()}
                         className={`cursor-pointer border border-border rounded p-1 min-h-[200px] ${
-                          isCurrentDay ? "border-orange-600" : ""
+                          isCurrentDay ? "border-y-accent border-x-accent" : ""
                         } ${dayEvents.length ? "" : ""}`}
                         title={`${dayEvents.length} event(s)`}
                         onClick={() => {

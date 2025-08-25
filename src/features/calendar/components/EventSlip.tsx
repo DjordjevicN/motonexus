@@ -1,17 +1,13 @@
-import React from "react";
-type Event = {
-  id: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-  country: string;
-};
-const EventSlip = ({ event }: { event: Event }) => {
+import { IEvent } from "@/features/events/types/eventTypes";
+import { Country } from "country-state-city";
+
+const EventSlip = ({ event }: { event: IEvent }) => {
   return (
-    <div className="bg-card p-2">
-      <h4 className="truncate">{event.title}</h4>
-      <p></p>
-      <p>Belgrade {event.country}</p>
+    <div className="bg-card p-2 mb-1">
+      <h4 className="truncate text-white font-bold">{event.title}</h4>
+      <p className="text-muted-foreground">
+        {event.country ? Country.getCountryByCode(event.country)?.name : ""}
+      </p>
     </div>
   );
 };

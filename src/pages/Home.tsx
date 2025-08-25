@@ -2,13 +2,22 @@ import Logo from "../components/Logo";
 import { Link } from "react-router";
 import homepageBg from "../assets/homepageBg.png";
 import { ROUTES } from "../constants/routes";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
+  const { auth } = useSelector((state: RootState) => state.auth);
+
   return (
-    <div className="px-12 standardMaxWidth text-white">
+    <div className="px-12 pb-12 standardMaxWidth text-white">
       <div className="flex justify-between items-center p-4">
         <Logo />
-        <Link to={ROUTES.LOGIN}>Login / Register</Link>
+        {auth ? (
+          <Link to={ROUTES.DASHBOARD}>Dashboard</Link>
+        ) : (
+          <Link to={ROUTES.LOGIN}>Login / Register</Link>
+        )}
       </div>
       <h1 className="text-6xl font-bold mt-32 text-center text-white">
         Organize Rides & Ride Together.
@@ -20,16 +29,18 @@ const Home = () => {
         planning a multi-day road trip, MotoNexus helps you keep everything in
         sync — from dates and participants to gear and hotel bookings.
       </p>
-      <Link to={ROUTES.LOGIN} className="flex justify-center mt-10">
-        <button className="button-gradient">Get Started</button>
-      </Link>
+      <div className="flex justify-center mt-10">
+        <Link to={ROUTES.LOGIN}>
+          <Button className="button-gradient">Get Started</Button>
+        </Link>
+      </div>
       <div className="flex justify-center mt-24 ">
         <div className="box-gradient w-fit">
           <img src={homepageBg} alt="" />
         </div>
       </div>
 
-      <div className="clan  mt-32">
+      <div className="mt-32">
         <h2 className="text-5xl font-semibold text-center">
           What Can You Do With MotoNexus?
         </h2>
@@ -41,7 +52,7 @@ const Home = () => {
         </p>
       </div>
 
-      <div className="flex items-center mt-52 gap-16">
+      <div className="flex lg:flex-row flex-col-reverse items-center mt-52 gap-16">
         <div>
           <h3 className="text-2xl text-text font-semibold">
             Effortless Ride Meetups
@@ -61,11 +72,11 @@ const Home = () => {
           </ul>
         </div>
         <div className="w-fit">
-          <img className="max-w-[600px]" src={homepageBg} alt="" />
+          <img className="max-w-[600px] w-full" src={homepageBg} alt="" />
         </div>
       </div>
 
-      <div className="flex flex-row-reverse items-center mt-52 gap-16">
+      <div className="flex lg:flex-row-reverse flex-col-reverse items-center mt-52 gap-16">
         <div>
           <h3 className="text-2xl text-text font-semibold">
             Structure Through Riding Organizations
@@ -85,11 +96,11 @@ const Home = () => {
           </ul>
         </div>
         <div className="w-fit">
-          <img className="max-w-[600px]" src={homepageBg} alt="" />
+          <img className="max-w-[600px] w-full" src={homepageBg} alt="" />
         </div>
       </div>
 
-      <div className="flex items-center mt-52 gap-16">
+      <div className="flex lg:flex-row flex-col-reverse items-center mt-52 gap-16">
         <div>
           <h3 className="text-2xl text-text font-semibold">
             Advanced Trip Planning (Coming Soon)
@@ -116,7 +127,7 @@ const Home = () => {
           </ul>
         </div>
         <div className="w-fit">
-          <img className="max-w-[600px]" src={homepageBg} alt="" />
+          <img className="max-w-[600px] w-full" src={homepageBg} alt="" />
         </div>
       </div>
     </div>

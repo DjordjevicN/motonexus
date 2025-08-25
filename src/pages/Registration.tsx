@@ -89,10 +89,7 @@ const Registration = () => {
               {isSubmitting ? "Submitting..." : "Continue"}
             </Button>
 
-            <Link
-              to={ROUTES.LOGIN}
-              className="text-main-blue mt-2 cursor-pointer"
-            >
+            <Link to={ROUTES.LOGIN} className="text-accent mt-2 cursor-pointer">
               I have an account
             </Link>
           </div>
