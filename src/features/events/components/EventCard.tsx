@@ -35,7 +35,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
             <CiLocationOn />
             <p className="truncate">{event.address}</p>
           </div>
-          {event.link && (
+          {/* {event.link && (
             <>
               <p className="hidden lg:block">|</p>
               <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ const EventCard = ({ event }: { event: IEvent }) => {
                 </a>
               </div>
             </>
-          )}
+          )} */}
           <p className="hidden lg:block">|</p>
           <div>
             <Button variant={"ghost"} className="text-xs lg:text-sm truncate">
