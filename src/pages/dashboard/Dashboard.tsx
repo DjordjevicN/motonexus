@@ -7,7 +7,6 @@ import EventFilter, {
   EventFilters,
 } from "@/features/events/components/EventFilter";
 import { useMemo, useState } from "react";
-import { format } from "date-fns";
 
 type EventData = {
   data: IEvent[];
