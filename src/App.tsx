@@ -3,6 +3,12 @@ import { appRoutes } from "./routes";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import SidebarNavigation from "./components/navigation/SidebarNavigation";
+<<<<<<< HEAD
+// development
+=======
+// dev
+// staging
+>>>>>>> 7164ac8 (staging init)
 
 const App = () => {
   const location = useLocation();
