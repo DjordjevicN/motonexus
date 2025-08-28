@@ -3,7 +3,12 @@ import { appRoutes } from "./routes";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
 import SidebarNavigation from "./components/navigation/SidebarNavigation";
-//presek
+
+// dodajem nav
+// dodajem bug fix
+// dodajem bug fix 2
+// promena 1
+// promena 2
 
 const App = () => {
   const location = useLocation();
